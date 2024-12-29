@@ -25,6 +25,7 @@ def main():
         # screen_coords = screen.fill((0, 0, 0))
         _ = screen.fill((0, 0, 0))
         player.draw(screen)
+        player.update(dt)
         pygame.display.flip()
         time_since_last_tick = clock.tick(60)
         dt = time_since_last_tick / 1000
