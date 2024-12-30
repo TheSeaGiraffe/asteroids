@@ -36,7 +36,6 @@ def main():
     _ = AsteroidField()
 
     Shot.containers = (shots, updatable, drawable)
-    # _ = Shot(x, y)
 
     while True:
         for event in pygame.event.get():
@@ -51,6 +50,10 @@ def main():
             if a.has_collided(player):
                 print("Game over!")
                 sys.exit(0)
+            for s in shots:
+                if a.has_collided(s):
+                    a.kill()
+                    s.kill()
         pygame.display.flip()
         time_since_last_tick = clock.tick(60)
         dt = time_since_last_tick / 1000
