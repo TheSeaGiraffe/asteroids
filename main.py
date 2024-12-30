@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from asteroid import Asteroid
@@ -25,7 +27,7 @@ def main():
     x, y = SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2
 
     Player.containers = (updatable, drawable)
-    _ = Player(x, y)
+    player = Player(x, y)
 
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable,)
@@ -41,6 +43,10 @@ def main():
             d.draw(screen)
         for u in updatable:
             u.update(dt)
+        for a in asteroids:
+            if a.has_collided(player):
+                print("Game over!")
+                sys.exit(1)
         pygame.display.flip()
         time_since_last_tick = clock.tick(60)
         dt = time_since_last_tick / 1000
